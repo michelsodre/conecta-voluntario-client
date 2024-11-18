@@ -1,0 +1,20 @@
+.formPage {
+  background-color: black;
+  width: 90vw;
+  height: 90vh;
+  align-content: center;
+}
+.forms {
+  width: 90%;
+  justify-self: center;
+  align-self: center;
+  display: flex;
+  justify-content: space-evenly;
+  height: 80vh;
+  background-color: aqua;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
