@@ -1,0 +1,27 @@
+.divMenu {
+  display: flex;
+}
+.divMenu img {
+  width: 50px;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+}
+li {
+  background-color: black;
+  border-radius: 5px;
+  color: white;
+  float: right;
+  margin: 5px;
+  padding: 5px;
+}
+li:hover {
+  background-color: gray;
+}

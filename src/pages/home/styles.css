@@ -1,0 +1,15 @@
+.homeBanner {
+  justify-self: center;
+  margin: 77px;
+  height: 500px;
+  border-radius: 12px;
+}
+.homeWelcome {
+  background-color: rgb(224, 219, 219);
+  border-radius: 12px;
+  border: 1px solid black;
+  margin-left: 35px;
+  margin-right: 35px;
+  padding: 10px;
+  font-size: 20px;
+}
