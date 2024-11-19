@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './styles.css';
 
 export default function Signup() {
-    const [formVoluntary, setFormVoluntary] = useState({ name: "", birth_date: "", phone: "", email: "" })
+    const [formVoluntary, setFormVoluntary] = useState({ name: "", birth_date: "", phone: "", email: "", password: "" })
     const [formOng, setFormOng] = useState({ name: "", phone: "", email: "", description: "" })
     const navigate = useNavigate()
 
@@ -14,7 +14,8 @@ export default function Signup() {
             name: formVoluntary.name,
             birth_date: formVoluntary.birth_date,
             phone: formVoluntary.phone,
-            email: formVoluntary.email
+            email: formVoluntary.email,
+            password: formVoluntary.password
         }).then(result => {
             console.log(result);
         })
@@ -37,14 +38,16 @@ export default function Signup() {
         <div className='formPage'>
             <div className='forms'>
                 <form className='form' onSubmit={(e) => handleSaveVoluntaryToDataBase(e)}>
-                    <label htmlFor="name">Nome:</label>
-                    <input required type="text" name="name" id="name" value={formVoluntary.name} onChange={(e) => setFormVoluntary({ ...formVoluntary, name: e.target.value })} />
+                    <label htmlFor="namev">Nome:</label>
+                    <input required type="text" name="namev" id="namev" value={formVoluntary.name} onChange={(e) => setFormVoluntary({ ...formVoluntary, name: e.target.value })} />
                     <label htmlFor="birth_date">Data de nascimento:</label>
                     <input required type="date" name="birth_date" id="birth_date" value={formVoluntary.birth_date} onChange={(e) => setFormVoluntary({ ...formVoluntary, birth_date: e.target.value })} />
-                    <label htmlFor="phone">Telefone:</label>
-                    <input required type="text" name="phone" id="phone" value={formVoluntary.phone} onChange={(e) => setFormVoluntary({ ...formVoluntary, phone: e.target.value })} />
-                    <label htmlFor="email">Email:</label>
-                    <input required type="text" name="email" id="email" value={formVoluntary.email} onChange={(e) => setFormVoluntary({ ...formVoluntary, email: e.target.value })} />
+                    <label htmlFor="phonev">Telefone:</label>
+                    <input required type="text" name="phonev" id="phonev" value={formVoluntary.phone} onChange={(e) => setFormVoluntary({ ...formVoluntary, phone: e.target.value })} />
+                    <label htmlFor="emailv">Email:</label>
+                    <input required type="text" name="emailv" id="emailv" value={formVoluntary.email} onChange={(e) => setFormVoluntary({ ...formVoluntary, email: e.target.value })} />
+                    <label htmlFor="passwordv">Senha:</label>
+                    <input required type='password' name="passwordv" id="passwordv" value={formVoluntary.password} onChange={(e) => setFormVoluntary({ ...formVoluntary, password: e.target.value })} />
                     <button type="submit">Criar Conta Voluntário</button>
                 </form>
                 <form className='form' onSubmit={(e) => handleSaveOngToDataBase(e)}>
