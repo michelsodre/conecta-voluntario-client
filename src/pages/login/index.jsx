@@ -17,8 +17,10 @@ export default function Login() {
             const response = await axios.get(request)
             const data = await response
             const voluntary = data.data.oneVoluntary
+            console.log(voluntary);
+
             if (voluntary.password == form.password) {
-                setLoggedUser({ name: voluntary.name, _id: voluntary._id })
+                setLoggedUser({ birth_date: voluntary.birth_date, email: voluntary.email, name: voluntary.name, phone: voluntary.phone, _id: voluntary._id })
                 setIsLogged(true)
                 navigate('/')
             } else {
