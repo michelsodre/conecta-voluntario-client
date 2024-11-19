@@ -25,3 +25,6 @@ li {
 li:hover {
   background-color: gray;
 }
+a:hover {
+  cursor: pointer;
+}

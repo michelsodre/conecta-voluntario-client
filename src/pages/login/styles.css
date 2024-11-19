@@ -1,0 +1,18 @@
+.loginForm {
+  display: flex;
+  flex-direction: column;
+}
+.loginForm label {
+  margin: 5px;
+}
+.loginForm input {
+  margin: 5px;
+}
+.loginForm button {
+  margin: 5px;
+  background-color: cadetblue;
+}
+.logincontainer {
+  width: 30vw;
+  justify-self: center;
+}

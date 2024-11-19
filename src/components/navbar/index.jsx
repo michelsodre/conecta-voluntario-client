@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './styles.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { GlobalContext } from '../../context/index'
 
 const Navbar = () => {
+  const context = useContext(GlobalContext)
+  const navigate = useNavigate()
+  const { isLogged, setIsLogged, loggedUser, setLoggedUser } = context
+  function logout() {
+    setIsLogged(false)
+    setLoggedUser({ name: "", _id: "" })
+    navigate('/')
+  }
+
   //variavel de troca
-  let loggedUser = false
   return (
     <>
       <div className='navbar'>
@@ -14,13 +23,13 @@ const Navbar = () => {
           </div>
           <ul>
             {
-              loggedUser
+              isLogged //condicional para usuário logado
                 ? <>
                   <li>
-                    <Link to={'/'}>Logout</Link>
+                    <a onClick={logout}>Logout</a>
                   </li>
                   <li>
-                    <Link to={'/user'}>Meu Perfil</Link>
+                    <Link to={'/user'}>Perfil de {loggedUser.name}</Link>
                   </li>
                 </>
                 : <>

@@ -15,6 +15,8 @@ export default function Signup() {
             birth_date: formVoluntary.birth_date,
             phone: formVoluntary.phone,
             email: formVoluntary.email
+        }).then(result => {
+            console.log(result);
         })
         navigate('/')
     }
@@ -25,6 +27,8 @@ export default function Signup() {
             phone: formOng.phone,
             email: formOng.email,
             description: formOng.description
+        }).then(result => {
+            console.log(result);
         })
         navigate('/')
     }

@@ -1,5 +1,4 @@
 .formPage {
-  background-color: black;
   width: 90vw;
   height: 90vh;
   align-content: center;
@@ -11,10 +10,12 @@
   display: flex;
   justify-content: space-evenly;
   height: 80vh;
-  background-color: aqua;
 }
 .form {
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  width: 40%;
+  width: 45%;
+  height: 100%;
+  background-color: rgb(198, 197, 197);
 }

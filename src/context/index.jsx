@@ -3,12 +3,13 @@ import { createContext, useState } from "react";
 export const GlobalContext = createContext(null)
 //Create Global State
 export default function GlobalState({ children }) {
-    const [loggedUser, setLoggedUser] = useState()
+    const [loggedUser, setLoggedUser] = useState({ name: "", _id: "" })
     const [isOng, setIsOng] = useState(false)
+    const [isLogged, setIsLogged] = useState(false)
     //
     return (
         <GlobalContext.Provider
-            value={{ loggedUser, setLoggedUser, isOng, setIsOng }}>
+            value={{ loggedUser, setLoggedUser, isOng, setIsOng, isLogged, setIsLogged }}>
             {children}
         </GlobalContext.Provider>)
 }
