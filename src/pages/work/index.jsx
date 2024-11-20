@@ -1,7 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './styles.css'
+import { GlobalContext } from '../../context'
+import axios from 'axios'
 
 function Work() {
+    //Context
+    const context = useContext(GlobalContext)
+    const { loggedUser } = context
     //States
     const [dataWorkList, setDataWorkList] = useState([])
     const [ongList, setOngsList] = useState([])
@@ -23,6 +28,10 @@ function Work() {
         const data = await response.json()
         const ong = data.oneOng
         setOngsList((listaAtual) => [...listaAtual, ong])
+    }
+    ////Se Candidatar a vaga
+    async function Addition(id_work, id_voluntary) {
+        await axios.post(`http://localhost:5000/api/addition/add?id_work=${id_work}&id_voluntary=${id_voluntary}`)
     }
 
     //UseEffects
@@ -47,10 +56,11 @@ function Work() {
                             <div className='workCard' key={item._id}>
                                 <div className='workCardItens'>
                                     <h2>{item.title}</h2>
-                                    <h3>{ongList[index]?.name}</h3>
+                                    <h3>{ongList[index]?.name || 'Carregando ONG'}</h3>
                                     <p>Endereço: {item.address}</p>
                                     <p>Descrição: {item.description}</p>
                                     <p>Requisitos: {item.requirements}</p>
+                                    <button onClick={() => Addition(item._id, loggedUser._id)}>Candidatar</button>
                                 </div>
                             </div>
                     )
