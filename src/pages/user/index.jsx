@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './styles.css'
 import { GlobalContext } from '../../context'
+import axios from 'axios'
 
 function User() {
     //Context
     const context = useContext(GlobalContext)
-    const { loggedUser, listCandidaturas } = context
+    const { loggedUser, listCandidaturas, setListCandidaturas } = context
     //States
     const [listWorkDetails, setListWorkDetails] = useState([])
     //Functions
@@ -21,6 +22,18 @@ function User() {
         const work = data.aWork
 
         setListWorkDetails((listaAtual) => [...listaAtual, work])
+    }
+    ////Remover Candidatura
+    async function removeAddition(additionId) {
+        await axios.delete(`http://localhost:5000/api/addition/delete/${additionId}`)
+        await refreshData()
+    }
+    ////Atulizar página
+    async function refreshData() {
+        const request = `http://localhost:5000/api/addition/myadditions?id_voluntary=${loggedUser._id}`
+        const response = await fetch(request)
+        const data = await response.json()
+        setListCandidaturas(data.myAdditions)
     }
     ////Buscar detalhes de cada trabalho após carregar a lista de candidaturas
     useEffect(() => {
@@ -49,6 +62,7 @@ function User() {
                         <div>Status: {item.status}</div>
                         <div>Data Candidatura:{dataToString(listWorkDetails[index]?.creation_date)}</div>
                         <div>Descrição: {listWorkDetails[index]?.description}</div>
+                        <button onClick={() => removeAddition(item._id)}>Remover Candidatura</button>
                     </div>)))
                     : (<p>Sem candidaturas</p>)
                 }
