@@ -28,3 +28,6 @@
 .cardVaga p {
   margin: 1px;
 }
+.cardCandidatura {
+  border: 1px solid black;
+}
