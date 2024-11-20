@@ -5,21 +5,13 @@ import { GlobalContext } from '../../context'
 function User() {
     //Context
     const context = useContext(GlobalContext)
-    const { loggedUser } = context
+    const { loggedUser, listCandidaturas } = context
     //States
-    const [listCandidaturas, setListCandidaturas] = useState([])
     const [listWorkDetails, setListWorkDetails] = useState([])
     //Functions
     function dataToString(params) {
         const date = new Date(Date.parse(params)).toLocaleDateString()
         return date
-    }
-    ////Lista de candidaturas do usuário
-    async function candidaturas() {
-        const request = `http://localhost:5000/api/addition/myadditions?id_voluntary=${loggedUser._id}`
-        const response = await fetch(request)
-        const data = await response.json()
-        setListCandidaturas(data.myAdditions)
     }
     ////Detalhes da candidatura do usuário
     async function workDetails(id_work) {
@@ -30,10 +22,6 @@ function User() {
 
         setListWorkDetails((listaAtual) => [...listaAtual, work])
     }
-    //UseEffects
-    useEffect(() => {
-        candidaturas()
-    }, [])
     ////Buscar detalhes de cada trabalho após carregar a lista de candidaturas
     useEffect(() => {
         if (listCandidaturas.length > 0) {
