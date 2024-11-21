@@ -1,14 +1,16 @@
 import axios from "axios"
 import { GlobalContext } from "../../context"
 import "./styles.css"
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 export default function Ong() {
     //Context
     const context = useContext(GlobalContext)
     const { loggedOng, setLoggedOng } = context
+    //States
     const [edit, setEdit] = useState(false)
     const [editForm, setEditForm] = useState()
+    const [workToDelete, setWorkToDelete] = useState([])
     ////Mostrar Perfil
     ////Editar Perfil
     function isEdit() {
@@ -22,7 +24,6 @@ export default function Ong() {
             const request = `http://localhost:5000/api/ong/update/${loggedOng._id}`
             const response = await axios.put(request, data)
             const newData = response.data.currentOngUpdate
-            console.log(newData);
             setLoggedOng(newData)
             isEdit()
         } catch (error) {
@@ -30,7 +31,54 @@ export default function Ong() {
         }
     }
     ////Deletar Perfil
-    console.log(editForm);
+    async function DeleteOng() {
+        try {
+            await findAdditionsAndDelete()
+            await deleteWorks()
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+    async function findWork() {
+        try {
+            //Encontrar Vagas criadas
+            const requestWorks = `http://localhost:5000/api/work/ongworks?id_ong=${loggedOng._id}`
+            const response = await fetch(requestWorks)
+            const data = await response.json()
+            setWorkToDelete(data.works)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    //Encontrar inscrições de cada vaga
+    async function findAdditionsAndDelete() {
+        try {
+            const additionsToDelete = await Promise.all(
+                workToDelete.map(async (work) => {
+                    const requestAdditions = `http://localhost:5000/api/addition/deletemanywork/${work._id}`
+                    return axios.delete(requestAdditions)
+                }))
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    //Deletar Vagas da ONG
+    async function deleteWorks() {
+        try {
+            const worksToDelete = await Promise.all(
+                workToDelete.map(async (work) => {
+                    const requestWork = `http://localhost:5000/api/work/delete/${work._id}`
+                    return axios.delete(requestWork)
+                })
+            )
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    useEffect(() => {
+        findWork()
+    }, [loggedOng._id])
 
     return (
         <>
@@ -44,7 +92,7 @@ export default function Ong() {
                                 <label htmlFor="name">Nome</label>
                                 <input type="text" name="name" id="name" value={editForm.name} onChange={(e) => setEditForm({ ...editForm, name: e.target.value })} />
                                 <label htmlFor="description">Descrição</label>
-                                <input type="text" name="descrition" id="description" value={editForm.description} onChange={(e) => setEditForm({ ...editForm, description: e.target.value })} />
+                                <input type="text" name="description" id="description" value={editForm.description} onChange={(e) => setEditForm({ ...editForm, description: e.target.value })} />
                                 <label htmlFor="email">Email</label>
                                 <input type="text" name="email" id="email" value={editForm.email} onChange={(e) => setEditForm({ ...editForm, email: e.target.value })} />
                                 <label htmlFor="phone">Telefone</label>
@@ -54,6 +102,7 @@ export default function Ong() {
                                 <button onClick={() => isEdit()}>Cancelar</button>
                                 <button type="submit">Confirmar</button>
                             </form>
+                            <button onClick={() => DeleteOng()}>Deletar conta</button>
                         </>
                         :
                         <>
