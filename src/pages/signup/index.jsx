@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import './styles.css';
+import { GlobalContext } from '../../context';
 
 export default function Signup() {
+    //Context
+    const context = useContext(GlobalContext)
+    const { setLoggedUser, setIsLogged } = context
+    //States
     const [formVoluntary, setFormVoluntary] = useState({ name: "", birth_date: "", phone: "", email: "", password: "" })
     const [formOng, setFormOng] = useState({ name: "", phone: "", email: "", description: "" })
     const navigate = useNavigate()
@@ -19,7 +24,27 @@ export default function Signup() {
         }).then(result => {
             console.log(result);
         })
-        navigate('/')
+
+        try {
+            const request = `http://localhost:5000/api/voluntary/onevoluntary?email=${formVoluntary.email}`
+            const response = await axios.get(request)
+            const data = await response
+            const voluntary = data.data.oneVoluntary
+
+            if (voluntary.password == formVoluntary.password) {
+                setLoggedUser({ birth_date: voluntary.birth_date, email: voluntary.email, name: voluntary.name, phone: voluntary.phone, _id: voluntary._id })
+                setIsLogged(true)
+                navigate('/')
+            } else {
+                console.log('Email ou senha está errado!');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+
+
+
+        // navigate('/')
     }
     async function handleSaveOngToDataBase(e) {
         e.preventDefault()
