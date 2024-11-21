@@ -4,7 +4,7 @@ export const GlobalContext = createContext(null)
 //Create Global State
 export default function GlobalState({ children }) {
     //State Voluntário
-    const [loggedUser, setLoggedUser] = useState({ birth_date: "", email: "", name: "", phone: "", _id: "" })
+    const [loggedUser, setLoggedUser] = useState({ birth_date: "", email: "", name: "", phone: "", _id: "", password: "" })
     const [listCandidaturas, setListCandidaturas] = useState([])
     //State ONG
     const [loggedOng, setLoggedOng] = useState({ name: "", phone: "", email: "", description: "" })

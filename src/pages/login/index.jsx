@@ -19,7 +19,7 @@ export default function Login() {
             const voluntary = data.data.oneVoluntary
 
             if (voluntary.password == form.password) {
-                setLoggedUser({ birth_date: voluntary.birth_date, email: voluntary.email, name: voluntary.name, phone: voluntary.phone, _id: voluntary._id })
+                setLoggedUser({ birth_date: voluntary.birth_date, email: voluntary.email, name: voluntary.name, phone: voluntary.phone, _id: voluntary._id, password: voluntary.password })
                 setIsLogged(true)
                 navigate('/')
             } else {

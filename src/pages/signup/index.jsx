@@ -12,7 +12,7 @@ export default function Signup() {
     const [formVoluntary, setFormVoluntary] = useState({ name: "", birth_date: "", phone: "", email: "", password: "" })
     const [formOng, setFormOng] = useState({ name: "", phone: "", email: "", description: "" })
     const navigate = useNavigate()
-
+    ////Cadastro de voluntário
     async function handleSaveVoluntaryToDataBase(e) {
         e.preventDefault()
         await axios.post('http://localhost:5000/api/voluntary/add', {
@@ -24,7 +24,7 @@ export default function Signup() {
         }).then(result => {
             console.log(result);
         })
-
+        //Logar conta criada e redirecionar para Home
         try {
             const request = `http://localhost:5000/api/voluntary/onevoluntary?email=${formVoluntary.email}`
             const response = await axios.get(request)
@@ -32,7 +32,7 @@ export default function Signup() {
             const voluntary = data.data.oneVoluntary
 
             if (voluntary.password == formVoluntary.password) {
-                setLoggedUser({ birth_date: voluntary.birth_date, email: voluntary.email, name: voluntary.name, phone: voluntary.phone, _id: voluntary._id })
+                setLoggedUser({ birth_date: voluntary.birth_date, email: voluntary.email, name: voluntary.name, phone: voluntary.phone, _id: voluntary._id, password: voluntary.password })
                 setIsLogged(true)
                 navigate('/')
             } else {
@@ -42,9 +42,6 @@ export default function Signup() {
             console.log(error);
         }
 
-
-
-        // navigate('/')
     }
     async function handleSaveOngToDataBase(e) {
         e.preventDefault()
