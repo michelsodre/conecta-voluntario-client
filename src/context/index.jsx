@@ -7,7 +7,7 @@ export default function GlobalState({ children }) {
     const [loggedUser, setLoggedUser] = useState({ birth_date: "", email: "", name: "", phone: "", _id: "", password: "" })
     const [listCandidaturas, setListCandidaturas] = useState([])
     //State ONG
-    const [loggedOng, setLoggedOng] = useState({ name: "", phone: "", email: "", description: "" })
+    const [loggedOng, setLoggedOng] = useState()
     const [isOng, setIsOng] = useState(false)
     //State Condicional de Login
     const [isLogged, setIsLogged] = useState(false)
@@ -29,7 +29,7 @@ export default function GlobalState({ children }) {
 
     return (
         <GlobalContext.Provider
-            value={{ loggedUser, setLoggedUser, listCandidaturas, setListCandidaturas, isOng, setIsOng, isLogged, setIsLogged }}>
+            value={{ loggedUser, setLoggedUser, listCandidaturas, setListCandidaturas, isOng, setIsOng, isLogged, setIsLogged, loggedOng, setLoggedOng }}>
             {children}
         </GlobalContext.Provider>)
 }

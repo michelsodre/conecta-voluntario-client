@@ -6,9 +6,10 @@ import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
     const [form, setForm] = useState({ email: "", password: "" })
+    const [formOng, setFormOng] = useState({ email: "", password: "" })
     const context = useContext(GlobalContext)
     const navigate = useNavigate()
-    const { setIsLogged, setLoggedUser } = context
+    const { setIsLogged, setLoggedUser, loggedOng, setLoggedOng, setIsOng } = context
 
     async function onSubmit(e) {
         e.preventDefault()
@@ -28,8 +29,29 @@ export default function Login() {
         } catch (error) {
             console.log(error);
         }
-
     }
+
+    async function onSubmitOng(e) {
+        e.preventDefault()
+        try {
+            const request = `http://localhost:5000/api/ong/oneong?email=${formOng.email}`
+            const response = await axios.get(request)
+            const data = await response
+            const ong = data.data.oneOng
+
+            if (ong.password == formOng.password) {
+                await setLoggedOng(ong)
+                setIsOng(true)
+                setIsLogged(true)
+                navigate('/')
+            } else {
+                console.log('Email ou senha está errado!');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    console.log(loggedOng);
 
     return (
         <div className='logincontainer'>
@@ -38,7 +60,14 @@ export default function Login() {
                 <input type="text" name="email" id="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
                 <label htmlFor="password">Senha</label>
                 <input type="text" name="password" id="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
-                <button type="submit">Login</button>
+                <button type="submit">Login Voluntário</button>
+            </form>
+            <form className='loginForm' onSubmit={(e) => onSubmitOng(e)}>
+                <label htmlFor="email">Email</label>
+                <input type="text" name="email" id="email" value={formOng.email} onChange={(e) => setFormOng({ ...formOng, email: e.target.value })} />
+                <label htmlFor="password">Senha</label>
+                <input type="text" name="password" id="password" value={formOng.password} onChange={(e) => setFormOng({ ...formOng, password: e.target.value })} />
+                <button type="submit">Login ONG</button>
             </form>
         </div>
     )

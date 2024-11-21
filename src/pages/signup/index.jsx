@@ -10,7 +10,7 @@ export default function Signup() {
     const { setLoggedUser, setIsLogged } = context
     //States
     const [formVoluntary, setFormVoluntary] = useState({ name: "", birth_date: "", phone: "", email: "", password: "" })
-    const [formOng, setFormOng] = useState({ name: "", phone: "", email: "", description: "" })
+    const [formOng, setFormOng] = useState({ name: "", phone: "", email: "", description: "", password: "" })
     const navigate = useNavigate()
     ////Cadastro de voluntário
     async function handleSaveVoluntaryToDataBase(e) {
@@ -45,16 +45,13 @@ export default function Signup() {
     }
     async function handleSaveOngToDataBase(e) {
         e.preventDefault()
-        await axios.post('http://localhost:5000/api/ong/add', {
-            name: formOng.name,
-            phone: formOng.phone,
-            email: formOng.email,
-            description: formOng.description
-        }).then(result => {
+        await axios.post('http://localhost:5000/api/ong/add', formOng
+        ).then(result => {
             console.log(result);
         })
         navigate('/')
-    }
+    } console.log(formOng);
+
 
     return (
         <div className='formPage'>
@@ -81,6 +78,8 @@ export default function Signup() {
                     <input required type="text" name="phone" id="phone" value={formOng.phone} onChange={(e) => setFormOng({ ...formOng, phone: e.target.value })} />
                     <label htmlFor="email">Email:</label>
                     <input required type="text" name="email" id="email" value={formOng.email} onChange={(e) => setFormOng({ ...formOng, email: e.target.value })} />
+                    <label htmlFor="password">Senha</label>
+                    <input type="password" name="password" id="password" value={formOng.password} onChange={(e) => setFormOng({ ...formOng, password: e.target.value })} />
                     <button type="submit">Criar Conta ONG</button>
                 </form>
             </div>

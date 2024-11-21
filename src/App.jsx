@@ -8,6 +8,7 @@ import Work from './pages/work'
 //Components
 import Navbar from './components/navbar'
 import { Route, Routes } from 'react-router-dom'
+import Ong from './pages/ong'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/user' element={<User />} />
+          <Route path='/ong' element={<Ong />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />
           <Route path='/work' element={<Work />} />

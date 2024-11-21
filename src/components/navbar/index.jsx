@@ -6,10 +6,11 @@ import { GlobalContext } from '../../context/index'
 const Navbar = () => {
   const context = useContext(GlobalContext)
   const navigate = useNavigate()
-  const { isLogged, setIsLogged, loggedUser, setLoggedUser, setListCandidaturas } = context
+  const { isLogged, setIsLogged, loggedUser, setLoggedUser, setListCandidaturas, isOng, loggedOng, setLoggedOng } = context
   function logout() {
     setIsLogged(false)
     setLoggedUser({ birth_date: "", email: "", name: "", phone: "", _id: "" })
+    setLoggedOng()
     setListCandidaturas([])
     navigate('/')
   }
@@ -29,9 +30,14 @@ const Navbar = () => {
                   <li>
                     <a onClick={logout}>Logout</a>
                   </li>
-                  <li>
-                    <Link to={'/user'}>Perfil de {loggedUser.name}</Link>
-                  </li>
+                  {isOng
+                    ? <li>
+                      <Link to={'/ong'}>Perfil de {loggedOng.name}</Link>
+                    </li>
+                    : <li>
+                      <Link to={'/user'}>Perfil de {loggedUser.name}</Link>
+                    </li>}
+
                 </>
                 : <>
                   <li>
@@ -41,8 +47,12 @@ const Navbar = () => {
                   </li>
                   <li>
                     <Link to={'/login'}>Login</Link>
-                  </li></>}
-            <li><Link to={'/work'}>Vagas</Link></li>
+                  </li>
+                </>
+            }
+            {isOng
+              ? <li><Link to={'/'}>Minhas Vagas</Link></li>
+              : <li><Link to={'/work'}>Vagas</Link></li>}
             <li><Link to={'/'}>Início</Link></li>
           </ul>
         </div>
