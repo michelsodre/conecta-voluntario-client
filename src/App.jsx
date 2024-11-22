@@ -10,6 +10,7 @@ import Navbar from './components/navbar'
 import { Route, Routes } from 'react-router-dom'
 import Ong from './pages/ong'
 import OngWorks from './pages/ongwork'
+import WorkDetail from './pages/work-details'
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
           <Route path='/signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />
           <Route path='/work' element={<Work />} />
+          <Route path='/work/:_id' element={<WorkDetail />} />
           <Route path='/ongwork' element={<OngWorks />} />
         </Routes>
       </div>
