@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { GlobalContext } from "../../context"
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import './styles.css'
 
@@ -30,12 +30,25 @@ export default function OngWorks() {
     //Deletar vaga
     async function deleteWork(_id) {
         try {
+            await findAdditionsAndDelete(_id)
             await axios.delete(`http://localhost:5000/api/work/delete/${_id}`)
             fetchListOfWorks()
         } catch (error) {
             console.log(error);
         }
     }
+
+    async function findAdditionsAndDelete(idwork) {
+        try {
+            const requestAdditions = `http://localhost:5000/api/addition/deletemanywork/${idwork}`
+            return axios.delete(requestAdditions)
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
     //Editar Vaga
     function startEditing(work) {
         setEditWorkId(work._id); // Define o ID da vaga sendo editada
@@ -62,38 +75,6 @@ export default function OngWorks() {
     }, [loggedOng._id])
 
     return (
-        // <div>
-        // <div>
-        //     <p>Criar vaga</p>
-        //     <form onSubmit={(e) => newWork(e)}>
-        //         <label htmlFor="title">Título da vaga</label>
-        //         <input type="text" name="title" id="title" value={newWorkForm.title} onChange={(e) => setNewWorkForm({ ...newWorkForm, title: e.target.value })} />
-        //         <label htmlFor="description">Descrição</label>
-        //         <input type="text" name="description" id="description" value={newWorkForm.description} onChange={(e) => setNewWorkForm({ ...newWorkForm, description: e.target.value })} />
-        //         <label htmlFor="requirements">Requisitos</label>
-        //         <input type="text" name="requirements" id="requirements" value={newWorkForm.requirements} onChange={(e) => setNewWorkForm({ ...newWorkForm, requirements: e.target.value })} />
-        //         <label htmlFor="address">Endereço</label>
-        //         <input type="text" name="address" id="address" value={newWorkForm.address} onChange={(e) => setNewWorkForm({ ...newWorkForm, address: e.target.value })} />
-        //         <button type="submit">Criar Vaga</button>
-        //     </form>
-        // </div>
-        //     <div>
-        //         <h1>Minhas Vagas</h1>
-        //         {
-        //             listOfWorks
-        //                 ? listOfWorks.map((work, index) => (
-        //                     <div id={index} className='UnitWorkCard'>
-        //                         <p>Título: {work.title}</p>
-        //                         <p>Descrição: {work.description}</p>
-        //                         <p>Requisitos: {work.requirements}</p>
-        //                         <p>Endereço: {work.address}</p>
-        //                         <button onClick={() => deleteWork(work._id)}>Deletar vaga</button>
-        //                     </div>
-        //                 ))
-        //                 : <p>Sem Vagas</p>
-        //         }
-        //     </div>
-        // </div>
 
         <div>
             <div>
@@ -157,6 +138,7 @@ export default function OngWorks() {
                                         <p>Endereço: {work.address}</p>
                                         <button onClick={() => startEditing(work)}>Editar</button>
                                         <button onClick={() => deleteWork(work._id)}>Deletar vaga</button>
+                                        <Link to={`/work/${work._id}`}><button>Inscrições</button></Link>
                                     </>
                                 )
                             }
