@@ -51,7 +51,6 @@ export default function Login() {
             console.log(error);
         }
     }
-    console.log(loggedOng);
 
     return (
         <div className='logincontainer'>

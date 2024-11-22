@@ -2,15 +2,17 @@ import axios from "axios"
 import { GlobalContext } from "../../context"
 import "./styles.css"
 import React, { useContext, useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom"
 
 export default function Ong() {
     //Context
     const context = useContext(GlobalContext)
-    const { loggedOng, setLoggedOng } = context
+    const { loggedOng, setLoggedOng, setIsLogged, setLoggedUser, setIsOng, setListCandidaturas } = context
     //States
     const [edit, setEdit] = useState(false)
     const [editForm, setEditForm] = useState()
     const [workToDelete, setWorkToDelete] = useState([])
+    const navigate = useNavigate()
     ////Mostrar Perfil
     ////Editar Perfil
     function isEdit() {
@@ -35,10 +37,20 @@ export default function Ong() {
         try {
             await findAdditionsAndDelete()
             await deleteWorks()
+            await ongDelete()
+            setIsLogged(false)
+            setLoggedUser({ birth_date: "", email: "", name: "", phone: "", _id: "" })
+            setLoggedOng(null)
+            setIsOng(false)
+            setListCandidaturas([])
+            navigate('/')
         } catch (error) {
             console.log(error);
         }
-
+    }
+    async function ongDelete() {
+        const request = `http://localhost:5000/api/ong/delete/${loggedOng._id}`
+        return await axios.delete(request)
     }
     async function findWork() {
         try {
@@ -46,6 +58,7 @@ export default function Ong() {
             const requestWorks = `http://localhost:5000/api/work/ongworks?id_ong=${loggedOng._id}`
             const response = await fetch(requestWorks)
             const data = await response.json()
+            console.log("Vagas encontradas:", data.works);
             setWorkToDelete(data.works)
         } catch (error) {
             console.log(error);
@@ -56,11 +69,22 @@ export default function Ong() {
         try {
             const additionsToDelete = await Promise.all(
                 workToDelete.map(async (work) => {
+                    console.log("Tentando deletar inscrições para vaga:", work._id); // Debug
                     const requestAdditions = `http://localhost:5000/api/addition/deletemanywork/${work._id}`
-                    return axios.delete(requestAdditions)
+                    const response = axios.delete(requestAdditions)
                 }))
         } catch (error) {
-            console.log(error);
+            if (axios.isAxiosError(error)) {
+                // Verificar se o erro é do tipo AxiosError
+                console.error("Erro de Axios:", error.message); // Mensagem do erro
+                console.error("Código de Status:", error.response?.status); // Status HTTP da resposta
+                console.error("Código do erro:", error.code); // Código do erro específico, como ERR_BAD_REQUEST
+                console.error("Detalhes da configuração da requisição:", error.config); // Configuração da requisição
+                console.error("Pilha de execução:", error.stack); // Stack trace, útil para depuração
+            } else {
+                // Se não for um erro Axios, pode ser outro tipo de erro
+                console.error("Erro desconhecido:", error);
+            }
         }
     }
     //Deletar Vagas da ONG

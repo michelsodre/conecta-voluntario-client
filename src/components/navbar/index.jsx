@@ -6,11 +6,12 @@ import { GlobalContext } from '../../context/index'
 const Navbar = () => {
   const context = useContext(GlobalContext)
   const navigate = useNavigate()
-  const { isLogged, setIsLogged, loggedUser, setLoggedUser, setListCandidaturas, isOng, loggedOng, setLoggedOng } = context
+  const { isLogged, setIsLogged, loggedUser, setLoggedUser, setListCandidaturas, isOng, setIsOng, loggedOng, setLoggedOng } = context
   function logout() {
     setIsLogged(false)
     setLoggedUser({ birth_date: "", email: "", name: "", phone: "", _id: "" })
-    setLoggedOng()
+    setLoggedOng(null)
+    setIsOng(false)
     setListCandidaturas([])
     navigate('/')
   }
