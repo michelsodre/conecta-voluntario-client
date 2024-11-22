@@ -7,7 +7,7 @@ import { GlobalContext } from '../../context';
 export default function Signup() {
     //Context
     const context = useContext(GlobalContext)
-    const { setLoggedUser, setIsLogged } = context
+    const { setLoggedUser, setIsLogged, setLoggedOng, setIsOng } = context
     //States
     const [formVoluntary, setFormVoluntary] = useState({ name: "", birth_date: "", phone: "", email: "", password: "" })
     const [formOng, setFormOng] = useState({ name: "", phone: "", email: "", description: "", password: "" })
@@ -49,9 +49,26 @@ export default function Signup() {
         ).then(result => {
             console.log(result);
         })
-        navigate('/')
-    } console.log(formOng);
+        try {
+            const request = `http://localhost:5000/api/ong/oneong?email=${formOng.email}`
+            const response = await axios.get(request)
+            const data = await response
+            const ong = data.data.oneOng
+            if (ong.password == formOng.password) {
+                await setLoggedOng(ong)
+                setIsOng(true)
+                setIsLogged(true)
+                navigate('/')
+            } else {
+                console.log('Email ou senha está errado!');
+            }
+        } catch (error) {
+            console.log(error);
 
+        }
+
+        // navigate('/')
+    }
 
     return (
         <div className='formPage'>
