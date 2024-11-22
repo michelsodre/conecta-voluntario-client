@@ -9,6 +9,7 @@ import Work from './pages/work'
 import Navbar from './components/navbar'
 import { Route, Routes } from 'react-router-dom'
 import Ong from './pages/ong'
+import OngWorks from './pages/ongwork'
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
           <Route path='/signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />
           <Route path='/work' element={<Work />} />
+          <Route path='/ongwork' element={<OngWorks />} />
         </Routes>
       </div>
     </>

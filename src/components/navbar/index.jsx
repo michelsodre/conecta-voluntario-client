@@ -30,7 +30,7 @@ const Navbar = () => {
                   <li>
                     <a onClick={logout}>Logout</a>
                   </li>
-                  {isOng
+                  {isOng //Condicional se for ONG
                     ? <li>
                       <Link to={'/ong'}>Perfil de {loggedOng.name}</Link>
                     </li>
@@ -51,7 +51,7 @@ const Navbar = () => {
                 </>
             }
             {isOng
-              ? <li><Link to={'/'}>Minhas Vagas</Link></li>
+              ? <li><Link to={'/ongwork'}>Minhas Vagas</Link></li>
               : <li><Link to={'/work'}>Vagas</Link></li>}
             <li><Link to={'/'}>Início</Link></li>
           </ul>
