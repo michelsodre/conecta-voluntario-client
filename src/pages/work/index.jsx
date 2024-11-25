@@ -72,7 +72,7 @@ function Work() {
     return (
         <>
             <div>
-                <h1>Vagas ofertadas por ONGs</h1>
+                <h1>Vagas disponíveis para trabalho voluntário</h1>
                 {dataWorkList && dataWorkList.length
                     ? dataWorkList.map(
                         (item, index) => {

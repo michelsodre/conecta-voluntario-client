@@ -73,6 +73,9 @@ export default function Signup() {
     return (
         <div className='formPage'>
             <div className='forms'>
+                <div className='form'>
+                    <h3>Cadastro de voluntário</h3>
+                    <p>Preencha seus dados para ter acesso as vagas disponíveis para o seu perfil.</p>
                 <form className='form' onSubmit={(e) => handleSaveVoluntaryToDataBase(e)}>
                     <label htmlFor="namev">Nome:</label>
                     <input required type="text" name="namev" id="namev" value={formVoluntary.name} onChange={(e) => setFormVoluntary({ ...formVoluntary, name: e.target.value })} />
@@ -84,8 +87,12 @@ export default function Signup() {
                     <input required type="text" name="emailv" id="emailv" value={formVoluntary.email} onChange={(e) => setFormVoluntary({ ...formVoluntary, email: e.target.value })} />
                     <label htmlFor="passwordv">Senha:</label>
                     <input required type='password' name="passwordv" id="passwordv" value={formVoluntary.password} onChange={(e) => setFormVoluntary({ ...formVoluntary, password: e.target.value })} />
-                    <button type="submit">Criar Conta Voluntário</button>
+                    <button type="submit">Criar Conta</button>
                 </form>
+                </div>
+                <div className='form'>
+                <h3>Cadastro de ONGS</h3>
+                <p>Preencha os dados para criar conta, disponibilizar vagas e encontrar voluntários.</p>
                 <form className='form' onSubmit={(e) => handleSaveOngToDataBase(e)}>
                     <label htmlFor="name">Nome:</label>
                     <input required type="text" name="name" id="name" value={formOng.name} onChange={(e) => setFormOng({ ...formOng, name: e.target.value })} />
@@ -97,8 +104,9 @@ export default function Signup() {
                     <input required type="text" name="email" id="email" value={formOng.email} onChange={(e) => setFormOng({ ...formOng, email: e.target.value })} />
                     <label htmlFor="password">Senha</label>
                     <input type="password" name="password" id="password" value={formOng.password} onChange={(e) => setFormOng({ ...formOng, password: e.target.value })} />
-                    <button type="submit">Criar Conta ONG</button>
+                    <button type="submit">Criar Conta</button>
                 </form>
+                </div>
             </div>
         </div>
     )

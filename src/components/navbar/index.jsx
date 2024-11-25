@@ -20,11 +20,11 @@ const Navbar = () => {
   return (
     <>
       <div className='navbar'>
-        <div className='divMenu'>
-          <div >
-            <Link to={'/'}><img src="https://images.vexels.com/media/users/3/144097/isolated/lists/3dedcd235214cdde6b4e171fdbf66c9d-icone-de-coracao.png" alt="" /></Link>
-          </div>
-          <ul>
+      <div className='divMenu'>
+        <div>
+      <Link to={'/'}><img src="https://images.vexels.com/media/users/3/144097/isolated/lists/3dedcd235214cdde6b4e171fdbf66c9d-icone-de-coracao.png" alt="" /></Link>
+      </div>
+      <ul>
             {
               isLogged //condicional para usuário logado
                 ? <>
@@ -43,7 +43,7 @@ const Navbar = () => {
                 : <>
                   <li>
                     <Link to={'/signup'}>
-                      Cadastrar
+                      Cadastre-se
                     </Link>
                   </li>
                   <li>

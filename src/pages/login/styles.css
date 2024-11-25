@@ -10,9 +10,36 @@
 }
 .loginForm button {
   margin: 5px;
-  background-color: cadetblue;
+  background-color:  rgb(0, 145, 255);;
+  border-radius: 5px;
+  color: white;
+  margin: 5px;
+  padding: 5px;
 }
 .logincontainer {
   width: 30vw;
   justify-self: center;
+  background-color: rgb(247, 249, 250);
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 5px;
 }
+
+.title {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-bottom: 1px solid black;
+}
+
+.title button {
+  display: flex;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+}
+
+h3 h4 {
+  align-self: center;
+}
+

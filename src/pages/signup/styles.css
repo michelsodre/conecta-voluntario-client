@@ -1,21 +1,42 @@
 .formPage {
   width: 90vw;
-  height: 90vh;
   align-content: center;
+}
+
+.divForm {
+  margin: 10px;
+  padding: auto;
 }
 .forms {
   width: 90%;
   justify-self: center;
   align-self: center;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   height: 80vh;
 }
 .form {
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  width: 45%;
-  height: 100%;
-  background-color: rgb(198, 197, 197);
+  height: 120%;
+  padding: 10px;
+  background-color: rgb(247, 249, 250);
+  margin: 20px;
+  border-radius: 10px;
+}
+
+.form button {
+  background-color: rgb(0, 145, 255);
+  color: white;
+  margin-top: 15px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+h3 {
+  margin-left: 10px;
+}
+
+p {
+  margin-left: 10px;
 }

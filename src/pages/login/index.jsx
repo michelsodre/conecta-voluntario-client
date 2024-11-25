@@ -3,6 +3,7 @@ import "./styles.css"
 import { GlobalContext } from '../../context/index'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default function Login() {
     const [form, setForm] = useState({ email: "", password: "" })
@@ -54,6 +55,13 @@ export default function Login() {
 
     return (
         <div className='logincontainer'>
+            
+            <h4>CONECTA VOLUNTÁRIO</h4> 
+            <h3>Faça o login na sua conta</h3>  
+            <div className='title'>  
+            <p>Não tem cadastro?</p>
+            <button><Link to={'/signup'}>Cadastre-se</Link></button>
+            </div>
             <form className='loginForm' onSubmit={(e) => onSubmit(e)}>
                 <label htmlFor="email">Email</label>
                 <input type="text" name="email" id="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
