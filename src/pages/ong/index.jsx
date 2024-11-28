@@ -110,7 +110,7 @@ export default function Ong() {
                 {
                     edit
                         ?
-                        <>
+                        <div className="containerONGProfile">
                             <h1>Editar Informações</h1>
                             <form onSubmit={(e) => confirmEdit(e)} >
                                 <label htmlFor="name">Nome</label>
@@ -126,16 +126,16 @@ export default function Ong() {
                                 <button onClick={() => isEdit()}>Cancelar</button>
                                 <button type="submit">Confirmar</button>
                             </form>
-                            <button onClick={() => DeleteOng()}>Deletar conta</button>
-                        </>
+                            <button id="deleteButton" onClick={() => DeleteOng()}>Deletar conta</button>
+                        </div>
                         :
-                        <>
+                        <div className="containerONGProfile">
                             <h1>{loggedOng.name}</h1>
                             <p>{loggedOng.description}</p>
                             <p>{loggedOng.email}</p>
                             <p>{loggedOng.phone}</p>
                             <button onClick={() => isEdit()}>Editar</button>
-                        </>
+                        </div>
                 }
 
             </div>

@@ -144,7 +144,7 @@ function User() {
                     </div>)))
                     : (<p>Sem candidaturas</p>)
                 }
-                <button onClick={() => DeleteUser()}>Deletar Conta</button>
+                <button id='DeleteButton' onClick={() => DeleteUser()}>Deletar Conta</button>
             </div >
         </>
 
