@@ -138,7 +138,7 @@ function User() {
                     (<div key={index} className='cardCandidatura'>
                         <div>{listWorkDetails[index]?.title}</div>
                         <div>Status: {item.status}</div>
-                        <div>Data Candidatura:{dataToString(listWorkDetails[index]?.creation_date)}</div>
+                        <div>Data de criação da vaga: {dataToString(listWorkDetails[index]?.creation_date)}</div>
                         <div>Descrição: {listWorkDetails[index]?.description}</div>
                         <button onClick={() => removeAddition(item._id)}>Remover Candidatura</button>
                     </div>)))

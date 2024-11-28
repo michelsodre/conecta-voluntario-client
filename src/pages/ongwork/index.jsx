@@ -77,8 +77,8 @@ export default function OngWorks() {
     return (
 
         <div>
-            <div>
-                <p>Criar vaga</p>
+            <div className='containerCreateWork'>
+                <h1>Criar vaga</h1>
                 <form onSubmit={(e) => newWork(e)}>
                     <label htmlFor="title">Título da vaga</label>
                     <input type="text" name="title" id="title" value={newWorkForm.title} onChange={(e) => setNewWorkForm({ ...newWorkForm, title: e.target.value })} />
@@ -91,61 +91,63 @@ export default function OngWorks() {
                     <button type="submit">Criar Vaga</button>
                 </form>
             </div>
-            <h1>Minhas Vagas</h1>
-            {
-                listOfWorks
-                    ? listOfWorks.map((work, index) => (
-                        <div key={work._id} className='UnitWorkCard'>
-                            {
-                                editWorkId === work._id ? (
-                                    <form onSubmit={saveEdit}>
-                                        <label htmlFor="edit-title">Título:</label>
-                                        <input
-                                            type="text"
-                                            id="edit-title"
-                                            value={editWorkForm.title}
-                                            onChange={(e) => setEditWorkForm({ ...editWorkForm, title: e.target.value })}
-                                        />
-                                        <label htmlFor="edit-description">Descrição:</label>
-                                        <input
-                                            type="text"
-                                            id="edit-description"
-                                            value={editWorkForm.description}
-                                            onChange={(e) => setEditWorkForm({ ...editWorkForm, description: e.target.value })}
-                                        />
-                                        <label htmlFor="edit-requirements">Requisitos:</label>
-                                        <input
-                                            type="text"
-                                            id="edit-requirements"
-                                            value={editWorkForm.requirements}
-                                            onChange={(e) => setEditWorkForm({ ...editWorkForm, requirements: e.target.value })}
-                                        />
-                                        <label htmlFor="edit-address">Endereço:</label>
-                                        <input
-                                            type="text"
-                                            id="edit-address"
-                                            value={editWorkForm.address}
-                                            onChange={(e) => setEditWorkForm({ ...editWorkForm, address: e.target.value })}
-                                        />
-                                        <button type="submit">Salvar</button>
-                                        <button onClick={() => setEditWorkId(null)}>Cancelar</button>
-                                    </form>
-                                ) : (
-                                    <>
-                                        <p>Título: {work.title}</p>
-                                        <p>Descrição: {work.description}</p>
-                                        <p>Requisitos: {work.requirements}</p>
-                                        <p>Endereço: {work.address}</p>
-                                        <button onClick={() => startEditing(work)}>Editar</button>
-                                        <button onClick={() => deleteWork(work._id)}>Deletar vaga</button>
-                                        <Link to={`/work/${work._id}`}><button>Inscrições</button></Link>
-                                    </>
-                                )
-                            }
-                        </div>
-                    ))
-                    : <p>Sem Vagas</p>
-            }
+            <div className='containerMyWorks'>
+                <h1>Minhas Vagas</h1>
+                {
+                    listOfWorks
+                        ? listOfWorks.map((work, index) => (
+                            <div key={work._id} className='UnitWorkCard'>
+                                {
+                                    editWorkId === work._id ? (
+                                        <form onSubmit={saveEdit}>
+                                            <label htmlFor="edit-title">Título:</label>
+                                            <input
+                                                type="text"
+                                                id="edit-title"
+                                                value={editWorkForm.title}
+                                                onChange={(e) => setEditWorkForm({ ...editWorkForm, title: e.target.value })}
+                                            />
+                                            <label htmlFor="edit-description">Descrição:</label>
+                                            <input
+                                                type="text"
+                                                id="edit-description"
+                                                value={editWorkForm.description}
+                                                onChange={(e) => setEditWorkForm({ ...editWorkForm, description: e.target.value })}
+                                            />
+                                            <label htmlFor="edit-requirements">Requisitos:</label>
+                                            <input
+                                                type="text"
+                                                id="edit-requirements"
+                                                value={editWorkForm.requirements}
+                                                onChange={(e) => setEditWorkForm({ ...editWorkForm, requirements: e.target.value })}
+                                            />
+                                            <label htmlFor="edit-address">Endereço:</label>
+                                            <input
+                                                type="text"
+                                                id="edit-address"
+                                                value={editWorkForm.address}
+                                                onChange={(e) => setEditWorkForm({ ...editWorkForm, address: e.target.value })}
+                                            />
+                                            <button type="submit">Salvar</button>
+                                            <button onClick={() => setEditWorkId(null)}>Cancelar</button>
+                                        </form>
+                                    ) : (
+                                        <>
+                                            <p>Título: {work.title}</p>
+                                            <p>Descrição: {work.description}</p>
+                                            <p>Requisitos: {work.requirements}</p>
+                                            <p>Endereço: {work.address}</p>
+                                            <button onClick={() => startEditing(work)}>Editar</button>
+                                            <button onClick={() => deleteWork(work._id)}>Deletar vaga</button>
+                                            <Link to={`/work/${work._id}`}><button>Inscrições</button></Link>
+                                        </>
+                                    )
+                                }
+                            </div>
+                        ))
+                        : <p>Sem Vagas</p>
+                }
+            </div>
         </div>
     )
 }
