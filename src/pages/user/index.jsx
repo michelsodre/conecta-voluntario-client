@@ -42,14 +42,19 @@ function User() {
     ////Deletar Conta do usuário
     async function DeleteUser() {
         try {
-            //deletear todas as inscrições em vagas
             await axios.delete(`http://localhost:5000/api/addition/deletemany/${loggedUser._id}`)
+                .catch((error) => {
+                    console.error("Erro ao deletar inscrições:", error);
+                });
+
             await axios.delete(`http://localhost:5000/api/voluntary/delete/${loggedUser._id}`)
-
+                .catch((error) => {
+                    console.error("Erro ao deletar voluntário:", error);
+                });
         } catch (error) {
-            console.log(error);
-
+            console.error("Erro inesperado:", error);
         }
+
         await setLoggedUser({ birth_date: "", email: "", name: "", phone: "", _id: "" })
         await setIsLogged(false)
         await setIsOng(false)
@@ -94,6 +99,7 @@ function User() {
         }
     }, [loggedUser]);
 
+    console.log(loggedUser);
 
     return (
         <>
