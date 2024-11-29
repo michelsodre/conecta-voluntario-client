@@ -80,7 +80,7 @@ export default function WorkDetail() {
     }
 
     return (
-        <div>{workDetails
+        <div className='containerWorkDetails'>{workDetails
             ?
             <>
                 <h1>{workDetails.title}</h1>
